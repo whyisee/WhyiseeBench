@@ -1,33 +1,27 @@
 #Thu May 15 19:05:52 CST 2014
 
-#Êý¾Ý¿âÅäÖÃ
-#DRIVER=oracle.jdbc.driver.OracleDriver
-#URL=jdbc:oracle:thin:@132.80.248.46:1521:saledb
-#USERNAME=BJ_UCR_STA_CEN
-#PASSWORD=sale123
-
-#ÈÕÖ¾¿ª¹Ø
+#ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½
 log_print=true
 error_print=true
 
-#udfÂ·¾¶
+#udfÂ·ï¿½ï¿½
 udf_path=/home/hive
 
-#hiveÊý¾ÝÂ·¾¶
+#hiveï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
 warehouse=/apps/hive/warehouse/
 
-Ä¬ÈÏhiveÁ¬½Ó
+Ä¬ï¿½ï¿½hiveï¿½ï¿½ï¿½ï¿½
 hive_db=BSS
 
-#¶ÓÁÐ
+#ï¿½ï¿½ï¿½ï¿½
 queue_name=datagather
 
-#¶ÓÁÐ1£¬2£¬3´Ó´óµ½Ð¡
+#ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½2ï¿½ï¿½3ï¿½Ó´ï¿½Ð¡
 queue_name1=datagather
 queue_name2=thirdpart
 queue_name3=default
 
-#¶ÓÁÐ0£¬CreateGroupId.java¸ù¾Ýgroup_idÈ¡Ä£ÓÃµ½
+#ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½CreateGroupId.javaï¿½ï¿½ï¿½ï¿½group_idÈ¡Ä£ï¿½Ãµï¿½
 queue_name0=default
 
 
@@ -35,17 +29,17 @@ queue_name0=default
 
 
 
-#×î´ó½ø³ÌÊý¡¢µ¥¸ö½ø³ÌµÄ×î´óÏß³ÌÊý
+#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½
 max_process=10
 max_thread=10
 
-#ÊÇ·ñÖØÐÂ¼ÓÔØÁ÷³ÌÐÅÏ¢
+#ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 reload_flowinfo=true
 
-#Í¬ÖÜÆÚÄÚ×î´óÖØ¸´Ö´ÐÐ´ÎÊý
+#Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½Ö´ï¿½Ð´ï¿½ï¿½ï¿½
 flow_redotimes=3
 node_redotimes=3
 
-#Ö÷³ÌÐòÃ¿´ÎÖ´ÐÐÊ±¼ä¼ä¸ô(Ãë)
+#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Ö´ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½)
 main_sleep=3
 flowinfo_print=false
