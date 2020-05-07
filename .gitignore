@@ -1,4 +1,15 @@
 # Created by .ignore support plugin (hsz.mobi)
+
+
+.idea
+/sparkStart/target
+/WorkTest/target
+*.class
+*.iml
+*.ipr
+*.iws
+
+
 ### Java template
 # Compiled class file
 *.class
@@ -24,10 +35,10 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+
+
+# IntelliJ project files
 .idea
-/sparkStart/target
-/WorkTest/target
-*.class
 *.iml
-*.ipr
-*.iws
+out
+gen
