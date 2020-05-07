@@ -1,0 +1,110 @@
+	<!-- 公用 -->
+    <cache name="COM_STATIC_COLLECT"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+        
+    <cache name="SYS_COLUMNS_CACHE"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+        
+    <cache name="SYS_KEYS_CACHE"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+
+    <cache name="COM_CONFIG_COLLECT"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+    
+    <cache name="COM_HINT_COLLECT"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+        
+    <cache name="COM_FLOW_COLLECT"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+    
+    <cache name="COM_BUILDER_COLLECT"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+
+ 	<cache name="COM_EXCEL_COLLECT"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+
+    <cache name="TD_M_AREA"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+        
+    <cache name="TD_M_DEPART"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+        
+    <cache name="TD_M_STAFF"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+        
+    <cache name="TD_S_QRY_CLASS"
+        maxElementsInMemory="10000"
+        eternal="true"
+        overflowToDisk="false"
+        />
+        
+    <cache name="COM_AREA_TREE"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToLiveSeconds="14400"
+        />
+        
+     <cache name="COM_DEPT_TREE"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToLiveSeconds="14400"
+        />
+    <cache name="COM_SALE_GRID_AREA_TREE"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToLiveSeconds="14400"
+        />
+    <cache name="COM_TARGET_INDEX"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToLiveSeconds="14400"
+        />
+    <cache name="COM_SALE_AREA_TREE"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToLiveSeconds="14400"
+        />
+    <cache name="COM_TEAM_CITY_CODE"
+        maxElementsInMemory="10000"
+        eternal="false"
+        overflowToDisk="false"
+        timeToLiveSeconds="14400"
+        />

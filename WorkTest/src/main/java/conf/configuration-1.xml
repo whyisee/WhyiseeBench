@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<configuration>
+    <proprety>
+        <name>color</name>
+        <value>yellow</value>
+        <description>Color</description>
+    </proprety>
+    <proprety>
+        <name>size</name>
+        <value>10</value>
+    </proprety>
+    <proprety>
+        <name>weight</name>
+        <value>100</value>
+        <final>true</final>
+    </proprety>
+    <proprety>
+        <name>size-weight</name>
+        <value>${size}-${weight}</value>
+        <final>true</final>
+    </proprety>
+</configuration>
