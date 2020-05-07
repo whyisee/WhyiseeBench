@@ -1,0 +1,3 @@
+db:
+  data:
+    kvpath: "D:\\git\\zdb\\data\\kvstore\\default.db"
