@@ -4,6 +4,9 @@
 .idea
 /sparkStart/target
 /WorkTest/target
+/zdb/target
+/zdb/data
+
 *.class
 *.iml
 *.ipr
