@@ -16,4 +16,7 @@ public class InterfaceT1Impl implements InterfaceT1 ,InterfaceT2{
     public void saybyebye() {
 
     }
+    public static void main(String args[]){
+        InterfaceT1.saybb();
+    }
 }
