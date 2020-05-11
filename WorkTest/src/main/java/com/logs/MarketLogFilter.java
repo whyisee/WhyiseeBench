@@ -43,7 +43,8 @@ public class MarketLogFilter extends Filter {
 
     @Override
     public int decide(LoggingEvent lgEvent) {
-        int inputLevel = lgEvent.getLevel().toInt();
+        //int inputLevel = lgEvent.getLevel().toInt();
+        int inputLevel = 1;
 
         if (inputLevel >= getLevel(levelMin)
                 && inputLevel <= getLevel(levelMax)) {

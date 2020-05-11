@@ -39,7 +39,7 @@ public class RDDBaseDeal {
 
 
         SparkSession sparkSession = SparkSession.builder()
-                .master("local")
+                .master("spark://192.168.56.201:7077")
                 //.config("spark.driver.host","192.168.100.21")
                 .appName("RDDBaseDeal")
                 .getOrCreate();
