@@ -1,6 +1,5 @@
-package com.bigdate.spark
+package com.zoukh.spark.start
 
-import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**

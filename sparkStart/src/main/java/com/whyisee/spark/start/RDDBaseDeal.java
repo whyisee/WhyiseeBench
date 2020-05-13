@@ -8,6 +8,7 @@ import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.sql.SparkSession;
 
+
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -26,24 +27,24 @@ public class RDDBaseDeal {
 
 
     public static void main(String args[]){
-/*        SparkConf conf = new SparkConf().setMaster("spark://172.16.210.211:7077")
+        SparkConf conf = new SparkConf().setMaster("spark://172.16.210.211:7077")
         //SparkConf conf = new SparkConf().setMaster("local")
                 .setAppName("RDDBaseDeal")
                 // .setJars(new String[]{"sparkStart/target/sparkStart-0.0.1.jar"})
                  .setIfMissing("spark.driver.host", "192.168.100.21")
                 ;
-        conf.setExecutorEnv("spark.driver.bindAddress","192.168.100.21");*/
+        conf.setExecutorEnv("spark.driver.bindAddress","192.168.100.21");
         System.setProperty("HADOOP_USER_NAME", "hadoop");
         System.setProperty("user.name", "hadoop");
-        //JavaSparkContext sc = new JavaSparkContext(conf);
+        JavaSparkContext sc = new JavaSparkContext(conf);
 
 
-        SparkSession sparkSession = SparkSession.builder()
+        /*SparkSession sparkSession = SparkSession.builder()
                 .master("spark://192.168.56.201:7077")
                 //.config("spark.driver.host","192.168.100.21")
                 .appName("RDDBaseDeal")
                 .getOrCreate();
-        JavaSparkContext sc = JavaSparkContext.fromSparkContext(sparkSession.sparkContext());
+        JavaSparkContext sc = JavaSparkContext.fromSparkContext(sparkSession.sparkContext());*/
         //SparkSession spark = SparkSession.builder();
         JavaRDD<Integer> rdd = sc.parallelize(Arrays.asList(1,2,3,4));
 

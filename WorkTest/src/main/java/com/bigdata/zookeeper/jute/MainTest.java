@@ -48,7 +48,7 @@ public class MainTest {
         System.out.println("Test--------10:51--->:"+head2.toString());
         bbis.close();
         in.close();
-        FileTxnLog
+        //FileTxnLog
         //baos.close();
 
 
