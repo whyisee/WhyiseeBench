@@ -4,7 +4,7 @@
 
 /zdb/data
 target
-
+data
 *.class
 *.iml
 *.ipr
