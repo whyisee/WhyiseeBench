@@ -143,6 +143,22 @@ public class QuickSort {
         return sum;
     }
 
+
+    // 3-8 只统计,不排序,开始魔幻起来了,len 为数组长度,函数化
+    //平均比较次数
+    public int quickSort8(int len){
+        int m;
+        int sum = 0;
+        if( len <=1 ) return 0;
+        m = new Random().nextInt(len);
+        //comps += len-1;
+        sum =  len-1 + quickSort6(m-1) + quickSort6(len-m);
+        /*for (int ){
+
+        }*/
+        return sum;
+    }
+
     public static void main(String args[]){
         int[] data0 = new int[20] ;
         for (int i = 0; i < 20; i++){
