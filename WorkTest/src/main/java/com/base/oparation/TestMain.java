@@ -1,5 +1,8 @@
 package com.base.oparation;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 /**
  * use for :
  *
@@ -20,5 +23,12 @@ public class TestMain {
         byte b = 0b11 ;
         System.out.println("Test--------17:21--->:"+b);
         System.out.println("Test--------18:00--->:"+"看".compareTo("3"));
+        System.out.println("test==>"+"1".chars());
+        IntStream in = "试试".chars();
+        int[] arr=in.toArray();
+
+//        IntStream in2 = "11233".codePoints();
+//        int[] arr2=in2.toArray();
+        System.out.println("test==>"+ Arrays.toString(arr));
     }
 }
