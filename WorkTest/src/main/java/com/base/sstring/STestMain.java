@@ -14,5 +14,13 @@ public class STestMain {
         StringUtils stringUtils = new StringUtils();
         System.out.println("Test--------14:48--->:"
                 +stringUtils.compareStringBySeparate("",""));
+
+        String str = "echo 123";
+        char[] strChar=str.toCharArray();
+        String result="";
+        for(int i=0;i<strChar.length;i++){
+            result +=Integer.toBinaryString(strChar[i])+ " ";
+        }
+        System.out.println(str.getBytes());
     }
 }
