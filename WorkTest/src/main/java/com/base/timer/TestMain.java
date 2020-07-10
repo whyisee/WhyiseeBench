@@ -2,6 +2,7 @@ package com.base.timer;
 
 import java.math.BigInteger;
 import java.util.*;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class TestMain {
 
@@ -19,17 +20,38 @@ public class TestMain {
         System.out.println("===test===>"+isPrime(bigNum));
         int count = 1;
 
-        while (count <= 5) {
+/*        while (count <= 5) {
             if (isPrime(bigNum)) {
                 System.out.println(bigNum);
                 count++;
             }
             bigNum = bigNum.add(BigInteger.ONE);
+        }*/
+
+        boolean taskFired;
+        if (taskFired = (1<=2)) {
+            System.out.println("===test===>"+111);
+        }else {
+            System.out.println("===test===>"+222);
+
         }
+        System.out.println("===test===>"+taskFired);
+        //ScheduledThreadPoolExecutor;
+
+        String str1 = "hello2";
+        final String str2 = "hello";
+        String str3 = "hello";
+
+        String str4 = str2+2;
+        String str5 = str3+2;
+        System.out.println("===test===>"+(str1 == str4));
+        System.out.println("===test===>"+(str2 == str3));
+        System.out.println("===test===>"+(str2 == str4));
+        System.out.println("===test===>"+(str1 .equals( str5)));
 
     }
     public static boolean isPrime(BigInteger num) {
-        return num.isProbablePrime(1000000000);
+        return num.isProbablePrime(1000);
 
     }
 

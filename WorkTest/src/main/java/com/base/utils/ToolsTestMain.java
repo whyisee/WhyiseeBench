@@ -5,6 +5,7 @@ import org.apache.hadoop.util.StringUtils;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * use for :
@@ -37,5 +38,7 @@ public class ToolsTestMain {
         cf.parse(args4);
         cf.displayAll();
         System.out.println("Test--------15:47--->:"+cf.getOptValue("t"));
+        System.out.println("===test===>"+MyEnum.WEEK.toString());
+        System.out.println("===test===>"+ TimeUnit.DAYS.toHours(10000L));
     }
 }
