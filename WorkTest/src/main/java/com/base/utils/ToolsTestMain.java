@@ -3,6 +3,7 @@ package com.base.utils;
 import org.apache.hadoop.util.StringUtils;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -40,5 +41,12 @@ public class ToolsTestMain {
         System.out.println("Test--------15:47--->:"+cf.getOptValue("t"));
         System.out.println("===test===>"+MyEnum.WEEK.toString());
         System.out.println("===test===>"+ TimeUnit.DAYS.toHours(10000L));
+
+        MyEnum2 enum2 = new MyEnum2();
+        enum2.applyStyles(EnumSet.of(MyEnum2.MyEnum3.BOLED,MyEnum2.MyEnum3.IITALIC));
+        AuthManager authManager = new AuthManager();
+        authManager.addAuth("ALTER",EnumSet.of(AuthManager.AuthType.INSERT,AuthManager.AuthType.DELETE));
+        authManager.removeAuth("INSERT",EnumSet.of(AuthManager.AuthType.INSERT,AuthManager.AuthType.DELETE));
+
     }
 }

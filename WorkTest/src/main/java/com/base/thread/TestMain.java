@@ -1,9 +1,6 @@
 package com.base.thread;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestMain {
@@ -34,6 +31,9 @@ public class TestMain {
         threadPoolExecutor.execute(new MyRunnable());
         threadPoolExecutor.submit(new MyRunnable());
         threadPoolExecutor.shutdown();
+        BlockingQueue<Runnable> workQueue ;
+        //workQueue.add();
+
 /*        System.out.println("===test===>"+future.get());
 
         System.out.println("===test===>COUNT_BITS"+COUNT_BITS);
@@ -54,7 +54,7 @@ public class TestMain {
         System.out.println("===test===>"+Integer.toBinaryString(-1<<2));
         System.out.println("===test===>"+threadPoolExecutor.isShutdown());*/
         System.out.println("===test===>"+tm.ctl.toString());
-        System.out.println("===test===>"+tm.ctl.compareAndSet(536870912,1+1));
+        System.out.println("===test===>"+tm.ctl.compareAndSet(-536870912,1+1));
         System.out.println("===test===>"+tm.ctl.toString());
 
 
