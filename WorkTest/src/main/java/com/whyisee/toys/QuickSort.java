@@ -45,6 +45,12 @@ public class QuickSort {
         quickSort1(begin,m-1);
         quickSort1(m+1,end);
     }
+    public void mySort1(){
+        //for ()
+        {
+
+        }
+    }
 
     // 3-2
     public void quickSort2(int begin,int end){
@@ -165,7 +171,7 @@ public class QuickSort {
             data0[i] = new Random().nextInt(20);
         }
 
-/*        int[] data = new int[1000_000_00] ;
+        int[] data = new int[1000_000_00] ;
         int[] data2 = new int[1000_000_00] ;
 
         Random rad = new Random();
@@ -174,26 +180,26 @@ public class QuickSort {
         }
         for (int i = 0; i < 1000_000_00; i++){
             data2[i] = rad.nextInt(1000_000_000);
-        }*/
+        }
         //Math.random();
         //swap(begin, rad.nextInt(end-begin)+begin);
 
-        QuickSort quickSort = new QuickSort(data0);
+        QuickSort quickSort = new QuickSort(data);
         long beginTime = System.currentTimeMillis();
         System.out.println("Test--------16:36--->:"+beginTime);
         //quickSort.quickSort4(0,data0.length-1);
-        quickSort.quickSort5(20);
+        quickSort.quickSort1(0,data.length-1);
         long endTime = System.currentTimeMillis();
         System.out.println("Test--------16:36--->:"+endTime+" use:"+(endTime-beginTime));
-        System.out.println("Test--------16:51--->:"+Arrays.toString(data0)+quickSort.comps);
+/*        System.out.println("Test--------16:51--->:"+Arrays.toString(data0)+quickSort.comps);
         
-        System.out.println("Test--------17:20--->:"+quickSort.quickSort6(20));
+        System.out.println("Test--------17:20--->:"+quickSort.quickSort6(20));*/
 
-/*        beginTime = System.currentTimeMillis();
+        beginTime = System.currentTimeMillis();
         System.out.println("Test--------16:36--->:"+beginTime);
         Arrays.sort(data2);
         endTime = System.currentTimeMillis();
-        System.out.println("Test--------16:36--->:"+endTime+" use:"+(endTime-beginTime));*/
+        System.out.println("Test--------16:36--->:"+endTime+" use:"+(endTime-beginTime));
 
     }
 }
