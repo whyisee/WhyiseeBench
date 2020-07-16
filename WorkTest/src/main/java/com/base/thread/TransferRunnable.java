@@ -13,11 +13,13 @@ public class TransferRunnable implements Runnable {
     public void run() {
 
         try {
-            int fromAccout = (int) (bank.size()*Math.random());
-            int toAccout = (int) (bank.size()*Math.random());
-            double amount = maxAmout * Math.random();
-            bank.transfer(fromAccout,toAccout,amount);
-            Thread.sleep((int)(DELAY*Math.random()));
+            while(true) {
+                int fromAccout = (int) (bank.size() * Math.random());
+                int toAccout = (int) (bank.size() * Math.random());
+                double amount = maxAmout * Math.random();
+                bank.transfer( toAccout,fromAccout, amount);
+                Thread.sleep((int) (DELAY * Math.random()));
+            }
         } catch (InterruptedException e){
 
         }
