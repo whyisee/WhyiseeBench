@@ -9,6 +9,9 @@ public class TestMain2 {
     static {
         System.out.println("===test===>"+222);
     }
+    {
+        System.out.println("===test===>"+333);
+    }
 
     public TestMain2 (){
         System.out.println("===test===>"+111);
@@ -19,12 +22,14 @@ public class TestMain2 {
         System.out.println(map.get(key));
     }
     public static void main(String[] args) {
+        //TestMain2 t2 = new TestMain2();
+
         for(int i = 0; i < 10; i++){
             new Thread(){
                 @Override
                 public void run() {
                     super.run();
-                    add("key");
+                  //  add("key");
                 }
             }.start();
         }
