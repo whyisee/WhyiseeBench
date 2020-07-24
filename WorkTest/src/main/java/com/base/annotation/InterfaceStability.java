@@ -1,27 +1,23 @@
 package com.base.annotation;
 
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @InterfaceAudience.Public
 @InterfaceStability.Evolving
-public class InterfaceAudience {
-    @Documented
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface Public {};
+public class InterfaceStability {
 
     @Documented
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface LimitedRrivate {
-        String[] value();
-    }
+    public @interface Stable {};
 
     @Documented
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface Private {};
+    public @interface Evolving {};
 
-    private InterfaceAudience(){}
-
-
+    @Documented
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface  Unstable {};
 }
