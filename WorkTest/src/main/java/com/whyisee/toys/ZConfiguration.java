@@ -322,23 +322,57 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
         return deprecationContext.get().getDeprecatedKeyMap().get(key);
     }
 
-
+    //设置废弃的配置属性
+    //处理也比较简单
+    //先获取线性的属性,在获取废弃的配置的上下文,遍历添加
     public void setDeprecatedProperties(){
         DeprecationContext deprecations = deprecationContext.get();
-        //Properties props = getProps();
+        Properties props = getProps();
+        Properties overlay = getOverlay();
+
+        for (Map.Entry<String,DeprecatedKeyInfo> entry : deprecations.getDeprecatedKeyMap().entrySet()) {
+            String depKey = entry.getKey();
+            if (!overlay.contains(depKey)) {
+                for (String newKey : entry.getValue().newKeys) {
+                    String val = overlay.getProperty(newKey);
+                    if (val != null) {
+                        props.setProperty(depKey,val);
+                        overlay.setProperty(depKey,val);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
 
-    protected synchronized Properties getProps(){
-        if (properties == null ){
+    protected synchronized Properties getProps() {
+        if (properties == null) {
             properties = new Properties();
-            Map<String,String[]> backup = updatingResource != null ?
+            Map<String, String[]> backup = updatingResource != null ?
                     new ConcurrentHashMap<>(updatingResource) : null;
-            loadResources(properties,resources,quietmode);
+            loadResources(properties, resources, quietmode);
+            if (overlay != null) {
+                properties.putAll(overlay);
+                if (backup != null) {
+                    for (Map.Entry<Object, Object> item : overlay.entrySet()) {
+                        String key = (String) item.getKey();
+                        String[] source = backup.get(key);
+                        if (source != null) {
+                            updatingResource.put(key, source);
+                        }
+                    }
+                }
+            }
         }
-
         return properties;
+    }
 
+    private synchronized Properties getOverlay() {
+        if (overlay == null){
+            overlay = new Properties();
+        }
+        return overlay;
     }
 
     private void loadResources(Properties properties,ArrayList<Resource> resources,boolean quiet){
@@ -346,6 +380,37 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
             for (String resource : defaultResources){
                 loadResource(properties,new Resource(resource,false),quiet);
             }
+        }
+
+        for (int i = 0; i < resources.size(); i++) {
+            Resource ret = loadResource(properties,resources.get(i),quiet);
+            if (ret != null) {
+                resources.set(i,ret);
+            }
+        }
+        this.addTags(properties);
+    }
+
+    public void addTags(Properties prop) {
+        try {
+            if (prop.containsKey(CommonConfigurationKeys.HADOOP_TAGS_SYSTEM)) {
+                String systemTags = prop.getProperty(CommonConfigurationKeys.HADOOP_TAGS_SYSTEM);
+                TAGS.addAll(Arrays.asList(systemTags.split(",")));
+            }
+            if (prop.containsKey(CommonConfigurationKeys.HADOOP_TAGS_CUSTOM)) {
+                String systemTags = prop.getProperty(CommonConfigurationKeys.HADOOP_TAGS_CUSTOM);
+                TAGS.addAll(Arrays.asList(systemTags.split(",")));
+            }
+            if (prop.containsKey(CommonConfigurationKeys.HADOOP_SYSTEM_TAGS)) {
+                String systemTags = prop.getProperty(CommonConfigurationKeys.HADOOP_SYSTEM_TAGS);
+                TAGS.addAll(Arrays.asList(systemTags.split(",")));
+            }
+            if (prop.containsKey(CommonConfigurationKeys.HADOOP_CUSTOM_TAGS)) {
+                String systemTags = prop.getProperty(CommonConfigurationKeys.HADOOP_CUSTOM_TAGS);
+                TAGS.addAll(Arrays.asList(systemTags.split(",")));
+            }
+        } catch (Exception e) {
+            LOG.trace("Error adding tags in configuration");
         }
     }
 
@@ -375,13 +440,21 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
             }
             List<ParsedItem> items = new Parser(reader,wrapper,quiet).parse();
             for (ParsedItem item : items) {
-                //loadP
+                loadProperty(toAddTo,item.name,item.key,item.value,item.isFinal,item.sources);
             }
-        } catch (Exception e) {
-
+            reader.close();
+            if (returnCachedProperties) {
+                overlay(properties,toAddTo);
+                return new Resource(toAddTo,name,wrapper.isRestricted());
+            }
+            return null;
+        } catch (IOException e) {
+            LOG.error("error parsing conf "+name,e);
+            throw new RuntimeException(e);
+        } catch (XMLStreamException e) {
+            LOG.error("error parsing conf " + name, e);
+            throw new RuntimeException(e);
         }
-        return  null;
-
     }
 
     private XMLStreamReader2 getStreamReader(Resource wrapper, boolean quiet) throws IOException, XMLStreamException {
