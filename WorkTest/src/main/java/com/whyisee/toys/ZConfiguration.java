@@ -10,6 +10,7 @@ import com.google.common.base.Preconditions;
 import org.apache.commons.collections.map.UnmodifiableMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.security.UserGroupInformation;
 import org.apache.hadoop.util.StringInterner;
@@ -94,6 +95,12 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
     private Properties properties;
     private Properties overlay;
     private ClassLoader classLoader;
+    {
+        classLoader = Thread.currentThread().getContextClassLoader();
+        if (classLoader == null) {
+            classLoader = Configuration.class.getClassLoader();
+        }
+    }
 
 
 
@@ -109,7 +116,7 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
         return TAGS;
     }
 
-    private static class Resource {
+    public static class Resource {
         private final Object resource;
         private final String name;
         private final boolean restrictParser;
@@ -324,7 +331,9 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
 
     //设置废弃的配置属性
     //处理也比较简单
-    //先获取线性的属性,在获取废弃的配置的上下文,遍历添加
+    //先获取当前的属性,再获取废弃的配置的上下文,遍历添加
+    //这里有两个当前属性,一个是正常的,一个是被覆盖的
+    //获取当前属性的时候有个问题,可能当前的属性还没有加载,所以获取当前属性的流程其实比较复杂
     public void setDeprecatedProperties(){
         DeprecationContext deprecations = deprecationContext.get();
         Properties props = getProps();
@@ -346,6 +355,13 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
     }
 
 
+    //获取当前属性,当前属性为null的时候需要更新,可能有多个线程同时获取,所有加锁
+    //updatingResource,正在更新的资源,先将正在更新的资源保存备份
+    //正在更新的资源和被覆盖的配置,
+    //加载配置文件
+    //如果被覆盖属性map不为null,将被覆盖属性放入当前属性map,
+    //如果有备份的真在更新的资源,则将被覆盖的属性放入正在更新的资源
+    //非常晕,需要知道被覆盖的属性,和正在更新的资源还在其他什么位置有操作
     protected synchronized Properties getProps() {
         if (properties == null) {
             properties = new Properties();
@@ -374,6 +390,12 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
         }
         return overlay;
     }
+
+    //分三部分
+    //1.加载默认配置资源
+    //2.加载入参指定资源
+    //3.增加tag
+    //先看增加tag
 
     private void loadResources(Properties properties,ArrayList<Resource> resources,boolean quiet){
         if (loadDefaults){
@@ -414,7 +436,10 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
         }
     }
 
-    private Resource loadResource(Properties properties,Resource wrapper,boolean quiet){
+    //加载资源
+    //Resource里面放的是个Object,所以就可以保存任意对象,这里主要处理了InputStream和Properties
+    //获取reader,XMLStringReader2
+    public Resource loadResource(Properties properties,Resource wrapper,boolean quiet){
         String name = UNKNOWN_RESOURCE;
         try{
             Object resource = wrapper.getResource();
@@ -457,6 +482,9 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
         }
     }
 
+    //获取reader,xml格式,支持的类型有url,字符串-传入的是一个相对的文件路径字符串,这个,输入流-文件流,Path 是完整路径
+    //这些类型最终都被转换成了输入流解析
+    //再深一步看看parse如何执行
     private XMLStreamReader2 getStreamReader(Resource wrapper, boolean quiet) throws IOException, XMLStreamException {
         Object resource = wrapper.getResource();
         boolean isRestricted = wrapper.isRestricted();
@@ -466,6 +494,7 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
             reader = (XMLStreamReader2)parse((URL)resource,isRestricted);
         } else if (resource instanceof String){
             URL url = getResource((String)resource);
+            //System.out.println("===test===>"+url);
             reader = (XMLStreamReader2)parse(url,isRestricted);
         } else if (resource instanceof Path){
             File file = new File(((Path)resource).toUri().getPath()).getAbsoluteFile();
@@ -483,9 +512,12 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
     }
 
     public URL getResource(String name){
+        //System.out.println("===test===>"+classLoader+"-"+name);
+        //System.out.println("===test===>"+classLoader.getResource(""));
         return classLoader.getResource(name);
     }
 
+    //url类型的多了一步打开流
     private XMLStreamReader parse (URL url,boolean restricted) throws IOException, XMLStreamException {
         if(!quietmode){
             if(LOG.isDebugEnabled()){
@@ -496,6 +528,7 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
             return null;
         }
         URLConnection connection = url.openConnection();
+        System.out.println("===test===>"+connection);
         if (connection instanceof JarURLConnection){
             connection.setUseCaches(false);
         }
@@ -503,6 +536,7 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
         return parse(connection.getInputStream(),url.toString(),restricted);
     }
 
+    //最后的方法 createSR()
     private XMLStreamReader parse(InputStream is,String systemIdStr,boolean restricted) throws XMLStreamException {
         if (!quietmode){
             LOG.debug("parsing input stream" + is);
@@ -613,6 +647,8 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
             this.quiet = quiet;
         }
 
+
+        //解析入口
         List<ParsedItem> parse() throws XMLStreamException, IOException {
             while (reader.hasNext()){
                 parseNext();
@@ -790,6 +826,7 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
             }
         }
 
+        //解析
         void parseNext() throws XMLStreamException, IOException {
             switch (reader.next()){
                 case XMLStreamConstants.START_ELEMENT:
