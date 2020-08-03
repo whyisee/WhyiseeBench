@@ -1,8 +1,14 @@
 package com.whyisee.toys;
 
+import com.ctc.wstx.api.ReaderConfig;
+import com.ctc.wstx.io.StreamBootstrapper;
+import com.ctc.wstx.io.SystemId;
+import com.ctc.wstx.stax.WstxInputFactory;
 import org.apache.commons.collections.Unmodifiable;
 import org.apache.commons.collections.map.UnmodifiableMap;
+import org.codehaus.stax2.XMLStreamReader2;
 
+import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,8 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+
 public class ToysTestMain {
-    public static void main(String[] args) throws MalformedURLException, FileNotFoundException {
+    public static void main(String[] args) throws MalformedURLException, FileNotFoundException, XMLStreamException {
         ZConfiguration zConfiguration = new ZConfiguration();
         System.out.println("===test===>"+zConfiguration.getTAGS());
        // ZConfiguration.DeprecationDelta deprecationDelta = new ZConfiguration.DeprecationDelta("", new String[] {},"111");
@@ -42,19 +49,40 @@ public class ToysTestMain {
         InputStream f2 = System.in;
         ZConfiguration.Resource resource = new ZConfiguration.Resource(properties2) ;
 
-        System.out.println(resource.getResource() instanceof Properties);
+        //System.out.println(resource.getResource() instanceof Properties);
 
         //InputStream in =
-        zConfiguration.loadResource(properties,new ZConfiguration.Resource(url),false);
+        //zConfiguration.loadResource(properties,new ZConfiguration.Resource(url),false);
 
         //zConfiguration.loadResource(properties,new ZConfiguration.Resource(surl),false);
         //zConfiguration.loadResource(properties,new ZConfiguration.Resource(f2),false);
         //zConfiguration.loadResource(properties,new ZConfiguration.Resource(properties2),false);
 
         for (Map.Entry entry: properties.entrySet()) {
-            System.out.println("===test===>"+entry.toString());
+            //System.out.println("===test===>"+entry.toString());
         }
         //System.out.println(file instanceof Object);
-        System.out.println("===test===>"+"end");
+        //System.out.println("===test===>"+"end");
+        WstxInputFactory XML_INPUT_FACTORY =
+                new WstxInputFactory();
+        ReaderConfig readerConfig = XML_INPUT_FACTORY.createPrivateConfig();
+        SystemId systemId = SystemId.construct("1");
+
+        StringBuilder sb = new StringBuilder();
+
+        XMLStreamReader2 reader2 = XML_INPUT_FACTORY.createSR(readerConfig,systemId,
+                StreamBootstrapper.getInstance(null,systemId,f),false,true);
+        System.out.println("===test===>"+reader2.next());
+        System.out.println("===test===>"+reader2.getLocalName());
+        System.out.println("===test===>"+reader2.next());
+        System.out.println("===test===>"+reader2.getTextCharacters());
+        sb.append("00",reader2.getTextStart(),reader2.getTextLength());
+        System.out.println("===test===>"+sb);
+        System.out.println("===test===>"+reader2.next());
+        System.out.println("===test===>"+reader2.getLocalName());
+        System.out.println("===test===>"+reader2.next());
+        System.out.println("===test===>"+reader2.getLocalName());
+        System.out.println("===test===>"+reader2.next());
+        System.out.println("===test===>"+reader2.getLocalName());
     }
 }

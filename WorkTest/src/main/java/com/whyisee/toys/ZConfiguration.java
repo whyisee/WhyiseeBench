@@ -827,6 +827,8 @@ public class ZConfiguration implements Iterable<Map.Entry<String,String>> , Writ
         }
 
         //解析
+        //next()方法返回的是eventType
+
         void parseNext() throws XMLStreamException, IOException {
             switch (reader.next()){
                 case XMLStreamConstants.START_ELEMENT:
