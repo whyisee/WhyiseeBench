@@ -1,5 +1,6 @@
 package com.base.thread;
 
+import java.math.BigInteger;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -57,6 +58,17 @@ public class TestMain {
         System.out.println("===test===>"+tm.ctl.compareAndSet(-536870912,1+1));
         System.out.println("===test===>"+tm.ctl.toString());
 
+/*        TestHarness testHarness = new TestHarness();
+        long useTimes= testHarness.timeTasks(10,new MyRunnable());
+        System.out.println("===test===>"+useTimes);
+        BoundedHashSet<Bank> bankSet  = new BoundedHashSet<>(2);
+        System.out.println(bankSet+"===test===>"+bankSet.add(new Bank()));*/
+
+        //bankSet.toString();
+
+        ExpensiveFunction expensiveFunction = new ExpensiveFunction();
+        Memoizer2<String , BigInteger> memoizer2 = new Memoizer2(expensiveFunction);
+        System.out.println("===test===>"+memoizer2.compute("1"));
 
     }
 }
