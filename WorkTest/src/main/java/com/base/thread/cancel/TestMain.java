@@ -1,5 +1,11 @@
 package com.base.thread.cancel;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.concurrent.ThreadFactory;
+
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
@@ -12,7 +18,13 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  * @used in: WhyiseeBench
  */
 public class TestMain {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
+        FileWriter fileWriter = new FileWriter("G:\\1");
+        LogWriter logWriter = new LogWriter(new PrintWriter(fileWriter));
+        logWriter.log("123");
+        logWriter.log("123");
+        //ThreadFactory
+        logWriter.start();
         PrimeGenerator generator = new PrimeGenerator();
         new Thread(generator).start();
 
@@ -22,5 +34,6 @@ public class TestMain {
             System.out.println("===test===>"+generator.get());
             generator.cancel();
         }
+        logWriter.log("123");
     }
 }
