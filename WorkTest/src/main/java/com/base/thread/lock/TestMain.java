@@ -1,6 +1,7 @@
 package com.base.thread.lock;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
 
 /**
  * use for :
@@ -22,5 +23,6 @@ public class TestMain {
         tran.transferMoney(account1,account2,200);
         System.out.println("===test===>"+account1.getBalance()+account2.getBalance());
         //ConcurrentHashMap
+        //Lock
     }
 }

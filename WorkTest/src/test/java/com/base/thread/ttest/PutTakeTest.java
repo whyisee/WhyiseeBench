@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * use for :
+ * use for : 生产者消费者测试类-挺强
  *
  * @author zoukh
  * Created in:  2020/9/29 16:58
