@@ -1,0 +1,27 @@
+spring:
+  thymeleaf:
+    prefix: "classpath:/static-web/"
+    suffix: ".html"
+    enabled: true
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/getdata?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  devtools:
+    restart:
+      enabled: true
+      exclude: static-web
+
+server:
+  port: 8181
+  servlet:
+    session:
+      cookie:
+        max-age: 86400

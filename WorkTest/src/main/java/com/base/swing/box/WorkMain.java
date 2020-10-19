@@ -21,10 +21,11 @@ public class WorkMain {
             public void run() {
                 MainJFrame frame = new MainJFrame();
                 //frame.add();
-                frame.setJMenuBar(new MainMenu());
+                //frame.setJMenuBar(new MainMenu());
 
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setVisible(true);
+                //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                //frame.setVisible(true);
+                //RightJPopupMenu rightJPopupMenu = new RightJPopupMenu();
             }
         });
     }
