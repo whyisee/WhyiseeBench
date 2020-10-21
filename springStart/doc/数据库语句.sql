@@ -30,54 +30,105 @@ begin
 end;
 
 
--- 创建登录表
-CREATE TABLE if not exists tc_acct_login (
-login_id	varchar(20) not NULL,
-login_name	varchar(20) not NULL,
-login_pass	varchar(200) not NULL,
-status	    varchar(2)  not NULL DEFAULT '1',
-PRIMARY KEY (login_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 创建数据源表
+CREATE TABLE tc_gd_datasource
+ (
+ source_id varchar(10) comment '数据源编码'
+,source_name varchar(50) comment '数据源名称'
+,source_name_zh varchar(200) comment '数据源中文名称'
+,source_type varchar(50) comment '分类'
+,source_key varchar(50) comment '主键'
+,source_alias varchar(10) comment '别名'
+,status varchar(2) comment '有效状态'
+,remark varchar(200) comment '备注'
+,create_persion varchar(200) comment '创建人'
+,create_date varchar(20) comment '创建时间'
+ ) comment=' 1.数据源表';
 
 
--- 创建登录角色表
-CREATE TABLE if not exists tc_acct_role (
-login_id	varchar(20)  not NULL,
-login_name	varchar(20)  not NULL,
-role_id	    varchar(20)  not NULL,
-status	    varchar(2)   not NULL DEFAULT '1',
-PRIMARY KEY (login_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 创建登录基本信息表
-CREATE TABLE if not exists tc_acct_member (
-login_id		varchar(20) not NULL,
-login_name		varchar(20) not NULL,
-user_name		varchar(50) DEFAULT NULL,
-student_id		varchar(50) DEFAULT NULL,
-sex		        varchar(10) DEFAULT NULL,
-in_date		    varchar(10) DEFAULT NULL,
-college		    varchar(50) DEFAULT NULL,
-specially		varchar(50) DEFAULT NULL,
-phone		    varchar(20) DEFAULT NULL,
-address		    varchar(200) DEFAULT NULL,
-email		    varchar(50) DEFAULT NULL,
-create_date		varchar(20) DEFAULT NULL,
-head_pic		varchar(200) DEFAULT NULL,
-is_add_info		varchar(2)  not NULL DEFAULT '0',
-status		    varchar(2)  not NULL DEFAULT '1',
-PRIMARY KEY (login_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 配置流程表
+CREATE TABLE tc_gd_configflow
+ (
+ flow_id varchar(10) comment '流程编码'
+,flow_name varchar(200) comment '流程名称'
+,flow_type varchar(10) comment '流程类型'
+,parent_flow_id varchar(10) comment '父流程编码'
+,flow_key varchar(50) comment '流程配置键'
+,flow_value1 varchar(2000) comment '流程配置值1'
+,flow_value2 varchar(2000) comment '流程配置值2'
+,flow_value3 varchar(2000) comment '流程配置值3'
+,flow_value4 varchar(2000) comment '流程配置值4'
+,flow_value5 varchar(2000) comment '流程配置值5'
+,flow_sort varchar(10) comment '流程序号'
+,status varchar(2) comment '有效状态'
+,remark varchar(200) comment '备注'
+,create_persion varchar(200) comment '创建人'
+,create_date varchar(20) comment '创建时间'
+ ) DEFAULT CHARSET=utf8, comment=' 配置流程表';
 
--- 角色码表
-CREATE TABLE if not exists tc_cde_role (
-role_id	varchar(10)              not NULL,
-role_name	varchar(50)          not NULL,
-remark	varchar(200)             DEFAULT NULL,
-status	varchar(2)               not NULL DEFAULT '1',
-PRIMARY KEY (role_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 配置结果表
+CREATE TABLE tc_gd_configmain
+ (
+ task_id varchar(10) comment '任务编码'
+,task_name varchar(200) comment '任务名称'
+,flow_id varchar(10) comment '任务流程编码'
+,exec_type varchar(10) comment '执行引擎'
+,exec_sql varchar(2000) comment '执行语句'
+,source_flow_id varchar(10) comment '数据源配置编码'
+,troop_flow_id varchar(10) comment '用户群配置编码'
+,cond_flow_id varchar(10) comment '筛选条件配置编码'
+,show_flow_id varchar(10) comment '展示配置编码'
+,cycle_type varchar(10) comment '周期类型'
+,cycle_value varchar(200) comment '周期执行项'
+,data_flow_id varchar(10) comment '结果配置编码'
+,data_file varchar(200) comment '最新结果文件'
+,data_num varchar(10) comment '最新结果数量'
+,task_status varchar(10) comment '最新任务执行状态'
+,begin_time varchar(10) comment '最新执行开始时间'
+,end_time varchar(10) comment '最新执行结束时间'
+,status varchar(2) comment '有效状态'
+,remark varchar(200) comment '备注'
+,create_persion varchar(200) comment '创建人'
+,create_date varchar(20) comment '创建时间'
+,update_persion varchar(200) comment '修改人'
+,update_date varchar(20) comment '修改时间'
+ ) DEFAULT CHARSET=utf8, comment=' 配置结果表';
 
+-- 标签配置表
+CREATE TABLE tc_gd_tagconfig
+ (
+ tag_id varchar(10) comment '标签编码'
+,tag_name varchar(200) comment '标签名称'
+,tag_name_zh varchar(200) comment '标签中文名称'
+,tag_from_id varchar(10) comment '数据来源编码'
+,tag_class_id varchar(10) comment '标签分类编码'
+,tag_data_type varchar(10) comment '标签数据类型'
+,tag_show_order varchar(10) comment '标签展示排序'
+,is_show varchar(2) comment '是否可展示'
+,is_cond varchar(2) comment '是否可做条件'
+,status varchar(2) comment '有效状态'
+,remark varchar(200) comment '备注'
+,create_persion varchar(200) comment '创建人'
+,create_date varchar(20) comment '创建时间'
+ ) DEFAULT CHARSET=utf8, comment=' 标签配置表';
+
+ CREATE TABLE tc_gd_tagconfig_flow
+ (
+ tag_id varchar(10) comment '标签编码'
+,tag_name varchar(200) comment '标签名称'
+,tag_name_zh varchar(200) comment '标签中文名称'
+,tag_from_id varchar(10) comment '数据来源编码'
+,tag_class_id varchar(10) comment '标签分类编码'
+,tag_data_type varchar(10) comment '标签数据类型'
+,tag_show_order varchar(10) comment '标签展示排序'
+,is_show varchar(2) comment '是否可展示'
+,is_cond varchar(2) comment '是否可做条件'
+,status varchar(2) comment '有效状态'
+,remark varchar(200) comment '备注'
+,create_persion varchar(200) comment '创建人'
+,create_date varchar(20) comment '创建时间'
+ ) DEFAULT CHARSET=utf8, comment=' 标签配置表';
 
 -- 社团表
  CREATE TABLE if not exists tc_comm_community (
@@ -99,17 +150,28 @@ PRIMARY KEY (comm_id)
 
 
 
-
-CREATE  TABLE if not exists tc_comm_class (
-        comm_class_id	varchar(20)                       not NULL,
-        comm_class_name	varchar(200)                      DEFAULT NULL,
-        update_persion_id	varchar(20)                   DEFAULT NULL,
-        update_date	varchar(20)                           DEFAULT NULL,
-        remark	varchar(200)                              DEFAULT NULL,
-        show_order_no int                  DEFAULT 0,
-        status	varchar(2)                                DEFAULT NULL,
-        PRIMARY KEY (comm_class_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 用户群表
+CREATE TABLE tc_gd_usertroop
+ (
+ troop_id varchar(10) comment '用户群编码'
+,troop_name varchar(200) comment '用户群名称'
+,troop_from varchar(200) comment '用户群来源'
+,troop_type varchar(20) comment '用户群类别'
+,troop_num varchar(10) comment '用户群数量'
+,troop_status varchar(10) comment '用户群状态'
+,troop_begin_date varchar(10) comment '用户生效开始时间'
+,troop_end_date varchar(10) comment '用户生效结束时间'
+,source_file_name varchar(200) comment '原始文件名'
+,troop_key varchar(200) comment '主键'
+,is_user_tag varchar(2) comment '是否使用其中标签'
+,tag_flow_id varchar(10) comment '标签配置编码'
+,status varchar(2) comment '有效状态'
+,remark varchar(200) comment '备注'
+,create_persion varchar(200) comment '创建人'
+,create_date varchar(20) comment '创建时间'
+,update_persion varchar(200) comment '修改人'
+,update_date varchar(20) comment '修改时间'
+ ) DEFAULT CHARSET=utf8, comment=' 用户群表';
 
 
 -- 社团成员关系表

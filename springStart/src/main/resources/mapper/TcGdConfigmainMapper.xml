@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whyisee.getdata.dao.TcGdConfigmainMapper">
+  <resultMap id="BaseResultMap" type="com.whyisee.getdata.model.TcGdConfigmain">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="flow_id" jdbcType="VARCHAR" property="flowId" />
+    <result column="exec_type" jdbcType="VARCHAR" property="execType" />
+    <result column="exec_sql" jdbcType="VARCHAR" property="execSql" />
+    <result column="source_flow_id" jdbcType="VARCHAR" property="sourceFlowId" />
+    <result column="troop_flow_id" jdbcType="VARCHAR" property="troopFlowId" />
+    <result column="cond_flow_id" jdbcType="VARCHAR" property="condFlowId" />
+    <result column="show_flow_id" jdbcType="VARCHAR" property="showFlowId" />
+    <result column="cycle_type" jdbcType="VARCHAR" property="cycleType" />
+    <result column="cycle_value" jdbcType="VARCHAR" property="cycleValue" />
+    <result column="data_flow_id" jdbcType="VARCHAR" property="dataFlowId" />
+    <result column="data_file" jdbcType="VARCHAR" property="dataFile" />
+    <result column="data_num" jdbcType="VARCHAR" property="dataNum" />
+    <result column="task_status" jdbcType="VARCHAR" property="taskStatus" />
+    <result column="begin_time" jdbcType="VARCHAR" property="beginTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_persion" jdbcType="VARCHAR" property="createPersion" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="update_persion" jdbcType="VARCHAR" property="updatePersion" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+  </resultMap>
+</mapper>

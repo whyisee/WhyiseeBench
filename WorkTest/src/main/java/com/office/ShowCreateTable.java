@@ -12,37 +12,58 @@ import org.apache.poi.ss.usermodel.Sheet;
  * @used in: WorkTest
  */
 public class ShowCreateTable {
-    public static void main(String[] args) throws Exception {
-        ExcelUtils excelUtils=new ExcelUtils();
-        String filePath= "D:\\桌面\\work\\脚本备份\\粉丝中心\\粉丝中心报表模型.xls";
-        //excelUtils.readExcelSheetRow(filePath,2);
-        //excelUtils.readExcelSheetAll(filePath,1);
-        Sheet sheet = excelUtils.getSheetByNum(filePath,2);
-        int rowNums = excelUtils.getLastRowNum(sheet);
+    static ExcelUtils excelUtils=new ExcelUtils();
 
+    public static void main(String[] args) throws Exception {
+        String filePath= "F:\\git\\WhyiseeBench\\springStart\\doc\\模型与接口.xlsx";
+        //第几个sheet页
+        Sheet sheet = excelUtils.getSheetByNum(filePath,5);
+        genCreateTable(sheet,"mysql");
+
+
+
+    }
+
+    public static void genCreateTable(Sheet sheet,String dbtype){
+        int rowNums = excelUtils.getLastRowNum(sheet);
         StringBuffer sb = new StringBuffer();
         //生成建表语句
         sb.append("\n"+"CREATE TABLE "+excelUtils.getSheetRowColString(sheet,3,1)+"\n");
         sb.append(" ( "+"\n");
-        sb.append(" "+excelUtils.getSheetRowColString(sheet,5,2)+" "+excelUtils.getSheetRowColString(sheet,5,3)+"\n");
 
-        for (int r = 6 ;r<=rowNums+1;r++) {
-            // excelUtils.readExcelSheetRow(filePath,r);
-            sb.append(","+excelUtils.getSheetRowColString(sheet,r,2)+" "+excelUtils.getSheetRowColString(sheet,r,3)+"\n");
+        if (dbtype.equals("oracle")) {
+            sb.append(" "+excelUtils.getSheetRowColString(sheet,5,2)+" "+excelUtils.getSheetRowColString(sheet,5,3)+"\n");
+            for (int r = 6; r <= rowNums + 1; r++) {
+                sb.append("," + excelUtils.getSheetRowColString(sheet, r, 2) + " " + excelUtils.getSheetRowColString(sheet, r, 3) + "\n");
 
+            }
+            sb.append(" ); " + "\n");
+
+            //生成注释
+            sb.append("comment on table  " + excelUtils.getSheetRowColString(sheet, 3, 1)
+                    + " is '" + excelUtils.getSheetRowColString(sheet, 1, 2) + "'; " + "\n");
+            for (int r = 5; r <= rowNums + 1; r++) {
+                // excelUtils.readExcelSheetRow(filePath,r);
+                sb.append("comment on column " + excelUtils.getSheetRowColString(sheet, 3, 1)
+                        + "." + excelUtils.getSheetRowColString(sheet, r, 2)
+                        + " is '" + excelUtils.getSheetRowColString(sheet, r, 1)
+                        + excelUtils.getSheetRowColString(sheet, r, 4) + "'; " + "\n");
+            }
+        }else if (dbtype.equals("mysql")){
+            sb.append(" "+excelUtils.getSheetRowColString(sheet,5,2)+" "
+                    +excelUtils.getSheetRowColString(sheet,5,3)
+                    +" comment '"+excelUtils.getSheetRowColString(sheet, 5, 1)
+                    + excelUtils.getSheetRowColString(sheet, 5, 4) + "'\n");
+            for (int r = 6; r <= rowNums + 1; r++) {
+                sb.append("," + excelUtils.getSheetRowColString(sheet, r, 2) + " " + excelUtils.getSheetRowColString(sheet, r, 3) +" comment '"+
+                        excelUtils.getSheetRowColString(sheet, r, 1)
+                        + excelUtils.getSheetRowColString(sheet, r, 4) + "'\n");
+
+            }
+            sb.append(" ) DEFAULT CHARSET=utf8, comment=' "+ excelUtils.getSheetRowColString(sheet, 1, 2)+ "';\n");
         }
-        sb.append(" ); "+"\n");
 
-        //生成注释
-        sb.append("comment on table  "+excelUtils.getSheetRowColString(sheet,3,1)+" is '"+excelUtils.getSheetRowColString(sheet,1,2)+"'; "+"\n");
-        for (int r = 5 ;r<=rowNums+1;r++) {
-            // excelUtils.readExcelSheetRow(filePath,r);
-            sb.append("comment on column "+excelUtils.getSheetRowColString(sheet,3,1)+"."+excelUtils.getSheetRowColString(sheet,r,2)
-                    +" is '"+excelUtils.getSheetRowColString(sheet,r,1)+excelUtils.getSheetRowColString(sheet,r,4)+"'; "+"\n");
-
-        }
-
-        System.out.println("Test--------18:50--->:"+sb);
+        System.out.println(sb);
 
     }
 }
