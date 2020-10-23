@@ -27,7 +27,7 @@ public class TcGdUsertroopController {
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         tcGdUsertroopService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }

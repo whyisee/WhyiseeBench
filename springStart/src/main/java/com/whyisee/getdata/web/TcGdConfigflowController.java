@@ -27,7 +27,7 @@ public class TcGdConfigflowController {
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         tcGdConfigflowService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }

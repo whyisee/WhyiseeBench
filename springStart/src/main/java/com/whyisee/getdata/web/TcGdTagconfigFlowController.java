@@ -27,7 +27,7 @@ public class TcGdTagconfigFlowController {
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         tcGdTagconfigFlowService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }

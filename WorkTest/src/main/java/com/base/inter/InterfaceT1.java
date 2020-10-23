@@ -13,10 +13,10 @@ public interface InterfaceT1 {
     default  void sayhello(){
         saybb();
         System.out.println("Test--------18:06--->:"+"hello");
-    };
+    }
     void saybyebye();
 
-    static void saybb(){
-        System.out.println("Test--------15:30--->:"+"bb");
-    };
+    static void saybb() {
+        System.out.println("Test--------15:30--->:" + "bb");
+    }
 }

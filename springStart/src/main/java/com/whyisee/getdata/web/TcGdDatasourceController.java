@@ -27,7 +27,7 @@ public class TcGdDatasourceController {
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         tcGdDatasourceService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
@@ -48,6 +48,14 @@ public class TcGdDatasourceController {
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<TcGdDatasource> list = tcGdDatasourceService.findAll();
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    @PostMapping("/search")
+    public Result search(@RequestBody TcGdDatasource tcGdDatasource) {
+        PageHelper.startPage(0, 0);
+        List<TcGdDatasource> list = tcGdDatasourceService.search(tcGdDatasource);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

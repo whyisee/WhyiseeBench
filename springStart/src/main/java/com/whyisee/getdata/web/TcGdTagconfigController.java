@@ -29,7 +29,7 @@ public class TcGdTagconfigController {
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         tcGdTagconfigService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }

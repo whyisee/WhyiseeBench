@@ -15,4 +15,23 @@
     <result column="create_persion" jdbcType="VARCHAR" property="createPersion" />
     <result column="create_date" jdbcType="VARCHAR" property="createDate" />
   </resultMap>
+
+    <sql id="Base_Column_List" >
+        source_id, source_name, source_name_zh, source_type, source_key, remark, create_persion, create_date
+    </sql>
+  <select id="search" resultMap="BaseResultMap" parameterType="com.whyisee.getdata.model.TcGdDatasource">
+        select
+        <include refid="Base_Column_List" />
+        FROM tc_gd_datasource
+        WHERE 1=1
+        and status='1'
+        <if test="sourceId != null">and source_id = #{sourceId}</if>
+        <if test="sourceName != null">and source_name = #{sourceName}</if>
+        <if test="sourceNameZh != null">and source_name_zh = #{sourceNameZh}</if>
+        <if test="sourceType != null">and source_type = #{sourceType}</if>
+        <if test="sourceKey != null">and source_key = #{sourceKey}</if>
+        <if test="remark != null">remark = #{remark}</if>
+        <if test="createPersion != null">create_persion = #{createPersion}</if>
+        <if test="createDate != null">create_date >= #{createDate}</if>
+  </select>
 </mapper>

@@ -28,7 +28,7 @@ public class TcGdConfigmainController {
     }
 
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
+    public Result delete(@PathVariable String id) {
         tcGdConfigmainService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }

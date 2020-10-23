@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -18,5 +19,7 @@ import javax.annotation.Resource;
 public class TcGdDatasourceServiceImpl extends AbstractService<TcGdDatasource> implements TcGdDatasourceService {
     @Resource
     private TcGdDatasourceMapper tcGdDatasourceMapper;
+
+    public List<TcGdDatasource> search(TcGdDatasource model){return tcGdDatasourceMapper.search(model);}
 
 }
