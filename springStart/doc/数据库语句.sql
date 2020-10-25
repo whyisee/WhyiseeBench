@@ -130,24 +130,33 @@ CREATE TABLE tc_gd_tagconfig
 ,create_date varchar(20) comment '创建时间'
  ) DEFAULT CHARSET=utf8, comment=' 标签配置表';
 
--- 社团表
- CREATE TABLE if not exists tc_comm_community (
-comm_id	varchar(20)                   not NULL,
-comm_name	varchar(200)              DEFAULT NULL,
-create_persion_id	varchar(20)       DEFAULT NULL,
-create_persion_name	varchar(200)      DEFAULT NULL,
-boss_id	varchar(20)                   DEFAULT NULL,
-boss_name	varchar(200)              DEFAULT NULL,
-create_date	varchar(20)               DEFAULT NULL,
-comm_people_num	varchar(20)           DEFAULT NULL,
-comm_class_id	varchar(20)           DEFAULT NULL,
-comm_info	varchar(500)              DEFAULT NULL,
-comm_pic	varchar(200)              DEFAULT NULL,
-comm_special_act	varchar(500)      DEFAULT NULL,
-status	varchar(2)                    not NULL DEFAULT '1',
-PRIMARY KEY (comm_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+-- 系统用户表
+CREATE TABLE tc_auth_user
+ (
+ persion_id varchar(10) comment '用户编码'
+,login_name varchar(200) comment '用户登录名'
+,show_name varchar(200) comment '用户昵称'
+,true_name varchar(200) comment '用户真实姓名'
+,sex varchar(2) comment '用户性别'
+,birthday varchar(10) comment '用户生日'
+,phone_number varchar(20) comment '用户联系方式'
+,email varchar(200) comment '用户邮箱'
+,password varchar(200) comment '用户密码'
+,user_status varchar(2) comment '用户状态'
+,last_login_date varchar(20) comment '用户上次登录时间'
+,role_id varchar(10) comment '用户角色编码'
+,depart_id varchar(10) comment '用户部门编码'
+,group_id varchar(10) comment '用户分组编码'
+,begin_date varchar(20) comment '账号有效开始时间'
+,end_date varchar(20) comment '账号有效结束时间'
+,create_type varchar(20) comment '用户创建方式'
+,status varchar(2) comment '有效状态'
+,remark varchar(200) comment '备注'
+,create_persion varchar(200) comment '创建人'
+,create_date varchar(20) comment '创建时间'
+,update_persion varchar(200) comment '修改人'
+,update_date varchar(20) comment '修改时间'
+ ) DEFAULT CHARSET=utf8, comment=' 系统用户表';
 
 
 -- 用户群表

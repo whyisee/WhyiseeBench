@@ -34,3 +34,11 @@ server:
     session:
       cookie:
         max-age: 86400
+
+file:
+  upload:
+    url: "F:\\data\\test"
+    maxFileSize: "1MB"
+    maxRequestSize: "10MB"
+  download:
+    url: "F:\\data\\test"
