@@ -60,6 +60,18 @@ public class TcGdConfigmain {
     private String showFlowId;
 
     /**
+     * 执行配置编码
+     */
+    @Column(name = "exec_flow_id")
+    private String execFlowId;
+
+    /**
+     * 结果配置编码
+     */
+    @Column(name = "data_flow_id")
+    private String dataFlowId;
+
+    /**
      * 周期类型
      */
     @Column(name = "cycle_type")
@@ -70,12 +82,6 @@ public class TcGdConfigmain {
      */
     @Column(name = "cycle_value")
     private String cycleValue;
-
-    /**
-     * 结果配置编码
-     */
-    @Column(name = "data_flow_id")
-    private String dataFlowId;
 
     /**
      * 最新结果文件
@@ -304,6 +310,42 @@ public class TcGdConfigmain {
     }
 
     /**
+     * 获取执行配置编码
+     *
+     * @return exec_flow_id - 执行配置编码
+     */
+    public String getExecFlowId() {
+        return execFlowId;
+    }
+
+    /**
+     * 设置执行配置编码
+     *
+     * @param execFlowId 执行配置编码
+     */
+    public void setExecFlowId(String execFlowId) {
+        this.execFlowId = execFlowId;
+    }
+
+    /**
+     * 获取结果配置编码
+     *
+     * @return data_flow_id - 结果配置编码
+     */
+    public String getDataFlowId() {
+        return dataFlowId;
+    }
+
+    /**
+     * 设置结果配置编码
+     *
+     * @param dataFlowId 结果配置编码
+     */
+    public void setDataFlowId(String dataFlowId) {
+        this.dataFlowId = dataFlowId;
+    }
+
+    /**
      * 获取周期类型
      *
      * @return cycle_type - 周期类型
@@ -337,24 +379,6 @@ public class TcGdConfigmain {
      */
     public void setCycleValue(String cycleValue) {
         this.cycleValue = cycleValue;
-    }
-
-    /**
-     * 获取结果配置编码
-     *
-     * @return data_flow_id - 结果配置编码
-     */
-    public String getDataFlowId() {
-        return dataFlowId;
-    }
-
-    /**
-     * 设置结果配置编码
-     *
-     * @param dataFlowId 结果配置编码
-     */
-    public void setDataFlowId(String dataFlowId) {
-        this.dataFlowId = dataFlowId;
     }
 
     /**

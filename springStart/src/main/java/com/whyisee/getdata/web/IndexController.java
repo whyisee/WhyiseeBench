@@ -46,7 +46,6 @@ public class IndexController {
     public Result loginDo(HttpServletRequest request, HttpServletResponse response, @RequestBody TcAuthUser user, String ifRemember){
         boolean ifRem = (ifRemember!=null && ifRemember.trim().length()>0 && "on".equals(ifRemember))?true:false;
 
-        System.out.println(user.getLoginName()+user.getPassword()+"===test===>"+user);
         return tcAuthUserService.login(request, response, user.getLoginName(), user.getPassword(), ifRem);
     }
     @RequestMapping(value="/logout", method=RequestMethod.POST)

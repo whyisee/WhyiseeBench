@@ -46,11 +46,8 @@ public class TcAuthUserController {
     }
     @GetMapping("/info")
     public Result info(@RequestParam String token) {
-        System.out.println("===test===>1"+token);
         TcAuthUser user = tcAuthUserService.parseToken(token);
-        System.out.println("===test===>2"+user);
         TcAuthUser tcAuthUser = tcAuthUserService.findById(user.getPersionId());
-        System.out.println("===test===>3"+  ResultGenerator.genSuccessResult(tcAuthUser));
         return ResultGenerator.genSuccessResult(tcAuthUser);
     }
 

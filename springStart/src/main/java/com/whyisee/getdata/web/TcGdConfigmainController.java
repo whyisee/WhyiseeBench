@@ -3,6 +3,7 @@ package com.whyisee.getdata.web;
 import com.whyisee.getdata.core.Result;
 import com.whyisee.getdata.core.ResultGenerator;
 import com.whyisee.getdata.model.TcGdConfigmain;
+import com.whyisee.getdata.model.TcGdDatasource;
 import com.whyisee.getdata.service.TcGdConfigmainService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -11,9 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
-
 /**
-* Created by zoukh on 2020/10/21.
+* Created by zoukh on 2020/10/25.
 */
 @RestController
 @RequestMapping("/configmain")
@@ -58,6 +58,13 @@ public class TcGdConfigmainController {
     Result searchForGet(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, @RequestParam Map<String,Object> data) throws Exception {
         PageHelper.startPage(page, size);
         List<TcGdConfigmain> list = tcGdConfigmainService.findAll();
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
+    }
+    @PostMapping("/search")
+    public Result search(@RequestBody TcGdConfigmain tcGdConfigmain) {
+        PageHelper.startPage(0, 0);
+        List<TcGdConfigmain> list = tcGdConfigmainService.search(tcGdConfigmain);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

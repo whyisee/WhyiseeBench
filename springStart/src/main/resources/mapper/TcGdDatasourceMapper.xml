@@ -30,8 +30,8 @@
         <if test="sourceNameZh != null">and source_name_zh = #{sourceNameZh}</if>
         <if test="sourceType != null">and source_type = #{sourceType}</if>
         <if test="sourceKey != null">and source_key = #{sourceKey}</if>
-        <if test="remark != null">remark = #{remark}</if>
-        <if test="createPersion != null">create_persion = #{createPersion}</if>
-        <if test="createDate != null">create_date >= #{createDate}</if>
+        <if test="remark != null">and remark = #{remark}</if>
+        <if test="createPersion != null">and create_persion = #{createPersion}</if>
+        <if test="createDate != null">and create_date >= #{createDate}</if>
   </select>
 </mapper>

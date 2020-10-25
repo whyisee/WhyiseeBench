@@ -14,9 +14,10 @@
     <result column="troop_flow_id" jdbcType="VARCHAR" property="troopFlowId" />
     <result column="cond_flow_id" jdbcType="VARCHAR" property="condFlowId" />
     <result column="show_flow_id" jdbcType="VARCHAR" property="showFlowId" />
+    <result column="exec_flow_id" jdbcType="VARCHAR" property="execFlowId" />
+    <result column="data_flow_id" jdbcType="VARCHAR" property="dataFlowId" />
     <result column="cycle_type" jdbcType="VARCHAR" property="cycleType" />
     <result column="cycle_value" jdbcType="VARCHAR" property="cycleValue" />
-    <result column="data_flow_id" jdbcType="VARCHAR" property="dataFlowId" />
     <result column="data_file" jdbcType="VARCHAR" property="dataFile" />
     <result column="data_num" jdbcType="VARCHAR" property="dataNum" />
     <result column="task_status" jdbcType="VARCHAR" property="taskStatus" />
@@ -29,4 +30,40 @@
     <result column="update_persion" jdbcType="VARCHAR" property="updatePersion" />
     <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
   </resultMap>
+
+  <sql id="Base_Column_List">
+  task_id,task_name,flow_id,exec_type,exec_sql,source_flow_id,troop_flow_id,cond_flow_id,show_flow_id
+  ,exec_flow_id,data_flow_id,cycle_type,cycle_value,data_file,data_num,task_status
+  ,begin_time,end_time,status,remark,create_persion,create_date,update_persion,update_date
+  </sql>
+  <select id="search" parameterType="com.whyisee.getdata.model.TcGdConfigmain" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    FROM tc_gd_configmain
+    WHERE 1=1
+    and status='1'
+    <if test="    taskId!= null">and   task_id  =  #{taskId}  </if>
+    <if test="    taskName!= null">and    task_name= #{taskName} </if>
+    <if test="    flowId!= null">and    flow_id = #{flowId}</if>
+    <if test="    execType!= null">and   exec_type  = #{execType} </if>
+    <if test="    execSql!= null">and    exec_sql   =    #{execSql}  </if>
+    <if test="    sourceFlowId!= null">and   source_flow_id =#{sourceFlowId}  </if>
+    <if test="    troopFlowId!= null">and   troop_flow_id=  #{troopFlowId}</if>
+    <if test="    condFlowId!= null">and   cond_flow_id=    #{condFlowId}    </if>
+    <if test="    showFlowId!= null">and    show_flow_id=  #{showFlowId}</if>
+    <if test="    execFlowId!= null">and    exec_flow_id=    #{execFlowId}    </if>
+    <if test="    dataFlowId!= null">and   data_flow_id  =    #{dataFlowId}   </if>
+    <if test="    cycleType!= null">and   cycle_type = #{cycleType}  </if>
+    <if test="    cycleValue!= null">and   cycle_value   =#{cycleValue}  </if>
+    <if test="    dataFile!= null">and    data_file    =    #{dataFile}   </if>
+    <if test="    dataNum!= null">and    data_num  = #{dataNum} </if>
+    <if test="    taskStatus!= null">and   task_status = #{taskStatus}  </if>
+    <if test="    beginTime!= null">and   begin_time=    #{beginTime}   </if>
+    <if test="    endTime!= null">and   end_time   =   #{endTime}</if>
+    <if test="    remark!= null">and   remark  = #{remark} </if>
+    <if test="    createPersion!= null">and    create_persion =#{createPersion}  </if>
+    <if test="    createDate!= null">and    create_date   =    #{createDate}    </if>
+    <if test="    updatePersion!= null">and   update_persion    =  #{updatePersion} </if>
+    <if test="    updateDate!= null">and   update_date  =   #{updateDate}    </if>
+  </select>
 </mapper>

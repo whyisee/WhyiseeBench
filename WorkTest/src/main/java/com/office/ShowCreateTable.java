@@ -17,7 +17,7 @@ public class ShowCreateTable {
     public static void main(String[] args) throws Exception {
         String filePath= "F:\\git\\WhyiseeBench\\springStart\\doc\\模型与接口.xlsx";
         //第几个sheet页
-        Sheet sheet = excelUtils.getSheetByNum(filePath,9);
+        Sheet sheet = excelUtils.getSheetByNum(filePath,5);
         genCreateTable(sheet,"mysql");
 
 
