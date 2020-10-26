@@ -1,5 +1,6 @@
 package com.whyisee.getdata.web;
 
+import com.alibaba.fastjson.JSONObject;
 import com.whyisee.getdata.core.Result;
 import com.whyisee.getdata.core.ResultGenerator;
 import com.whyisee.getdata.model.TcGdConfigmain;
@@ -7,6 +8,7 @@ import com.whyisee.getdata.model.TcGdDatasource;
 import com.whyisee.getdata.service.TcGdConfigmainService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.whyisee.utils.JSONUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -55,15 +57,16 @@ public class TcGdConfigmainController {
 
     @RequestMapping(value="/search",method = {RequestMethod.GET})
     public @ResponseBody
-    Result searchForGet(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size, @RequestParam Map<String,Object> data) throws Exception {
-        PageHelper.startPage(page, size);
-        List<TcGdConfigmain> list = tcGdConfigmainService.findAll();
+    Result searchForGet(@RequestBody TcGdConfigmain tcGdConfigmain) throws Exception {
+        PageHelper.startPage(0, 0);
+        List<TcGdConfigmain> list = tcGdConfigmainService.search(tcGdConfigmain);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
     @PostMapping("/search")
-    public Result search(@RequestBody TcGdConfigmain tcGdConfigmain) {
-        PageHelper.startPage(0, 0);
+    public Result search(@RequestBody  Map<String,Object> params) {
+        TcGdConfigmain tcGdConfigmain = JSONUtil.toBean((JSONObject.toJSONString(params)), TcGdConfigmain.class);
+        PageHelper.startPage((int)params.get("page"), (int)params.get("limit"));
         List<TcGdConfigmain> list = tcGdConfigmainService.search(tcGdConfigmain);
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);

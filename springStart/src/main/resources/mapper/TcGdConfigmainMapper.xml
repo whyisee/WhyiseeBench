@@ -42,28 +42,28 @@
     FROM tc_gd_configmain
     WHERE 1=1
     and status='1'
-    <if test="    taskId!= null">and   task_id  =  #{taskId}  </if>
-    <if test="    taskName!= null">and    task_name= #{taskName} </if>
-    <if test="    flowId!= null">and    flow_id = #{flowId}</if>
-    <if test="    execType!= null">and   exec_type  = #{execType} </if>
-    <if test="    execSql!= null">and    exec_sql   =    #{execSql}  </if>
-    <if test="    sourceFlowId!= null">and   source_flow_id =#{sourceFlowId}  </if>
-    <if test="    troopFlowId!= null">and   troop_flow_id=  #{troopFlowId}</if>
-    <if test="    condFlowId!= null">and   cond_flow_id=    #{condFlowId}    </if>
-    <if test="    showFlowId!= null">and    show_flow_id=  #{showFlowId}</if>
-    <if test="    execFlowId!= null">and    exec_flow_id=    #{execFlowId}    </if>
-    <if test="    dataFlowId!= null">and   data_flow_id  =    #{dataFlowId}   </if>
-    <if test="    cycleType!= null">and   cycle_type = #{cycleType}  </if>
-    <if test="    cycleValue!= null">and   cycle_value   =#{cycleValue}  </if>
-    <if test="    dataFile!= null">and    data_file    =    #{dataFile}   </if>
-    <if test="    dataNum!= null">and    data_num  = #{dataNum} </if>
-    <if test="    taskStatus!= null">and   task_status = #{taskStatus}  </if>
-    <if test="    beginTime!= null">and   begin_time=    #{beginTime}   </if>
-    <if test="    endTime!= null">and   end_time   =   #{endTime}</if>
-    <if test="    remark!= null">and   remark  = #{remark} </if>
-    <if test="    createPersion!= null">and    create_persion =#{createPersion}  </if>
-    <if test="    createDate!= null">and    create_date   =    #{createDate}    </if>
-    <if test="    updatePersion!= null">and   update_persion    =  #{updatePersion} </if>
-    <if test="    updateDate!= null">and   update_date  =   #{updateDate}    </if>
+    <if test="    taskId!= null and taskId != '' ">and   task_id  =  #{taskId}  </if>
+    <if test="    taskName!= null and taskName != '' ">and    task_name like  concat('%',#{taskName},'%')   </if>
+    <if test="    flowId!= null and flowId != '' ">and    flow_id = #{flowId}</if>
+    <if test="    execType!= null and execType != '' ">and   exec_type  = #{execType} </if>
+    <if test="    execSql!= null and execSql != '' ">and    exec_sql   =    #{execSql}  </if>
+    <if test="    sourceFlowId!= null and sourceFlowId != '' ">and   source_flow_id =#{sourceFlowId}  </if>
+    <if test="    troopFlowId!= null and troopFlowId != '' ">and   troop_flow_id=  #{troopFlowId}</if>
+    <if test="    condFlowId!= null and condFlowId != '' ">and   cond_flow_id=    #{condFlowId}    </if>
+    <if test="    showFlowId!= null and showFlowId != '' ">and    show_flow_id=  #{showFlowId}</if>
+    <if test="    execFlowId!= null and execFlowId != '' ">and    exec_flow_id=    #{execFlowId}    </if>
+    <if test="    dataFlowId!= null and dataFlowId != '' ">and   data_flow_id  =    #{dataFlowId}   </if>
+    <if test="    cycleType!= null and cycleType != '' ">and   cycle_type = #{cycleType}  </if>
+    <if test="    cycleValue!= null and cycleValue != '' ">and   cycle_value   =#{cycleValue}  </if>
+    <if test="    dataFile!= null and dataFile != '' ">and    data_file    =    #{dataFile}   </if>
+    <if test="    dataNum!= null and dataNum != '' ">and    data_num  = #{dataNum} </if>
+    <if test="    taskStatus!= null and taskStatus != '' ">and   task_status = #{taskStatus}  </if>
+    <if test="    beginTime!= null and beginTime != '' ">and   begin_time=    #{beginTime}   </if>
+    <if test="    endTime!= null and endTime != '' ">and   end_time   =   #{endTime}</if>
+    <if test="    remark!= null and remark != '' ">and   remark  = #{remark} </if>
+    <if test="    createPersion!= null and createPersion != '' ">and    create_persion =#{createPersion}  </if>
+    <if test="    createDate!= null and createDate != '' ">and    create_date   =    #{createDate}    </if>
+    <if test="    updatePersion!= null and updatePersion != '' ">and   update_persion    =  #{updatePersion} </if>
+    <if test="    updateDate!= null and updateDate != '' ">and   update_date  =   #{updateDate}    </if>
   </select>
 </mapper>
