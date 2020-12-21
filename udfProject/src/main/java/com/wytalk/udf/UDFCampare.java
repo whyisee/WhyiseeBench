@@ -1,9 +1,6 @@
-package com.bigdata.hadoop;
+package com.wytalk.udf;
 
 import org.apache.hadoop.hive.ql.exec.UDF;
-
-
-
 
 
 /**
@@ -15,7 +12,7 @@ import org.apache.hadoop.hive.ql.exec.UDF;
  * @Modified By:
  * @used in: WorkTest
  */
-public class UDFCampare   extends UDF {
+public class UDFCampare extends UDF {
     public static int evaluate(String str1,String str2 ,String separete){
         if(null==str1||str1.length()==0||null==str2||str2.length()==0){
             return 0;

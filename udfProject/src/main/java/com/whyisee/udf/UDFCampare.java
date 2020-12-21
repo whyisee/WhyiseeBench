@@ -1,4 +1,4 @@
-package com.bigdata.hadoop;
+package com.whyisee.udf;
 
 import org.apache.hadoop.hive.ql.exec.UDF;
 
@@ -37,6 +37,8 @@ public class UDFCampare   extends UDF {
     }
     public static void main (String args[]){
         System.out.println("Test--------15:51--->:"+evaluate("111:2,222:3","111:3,111:2"));
+        System.out.println(Integer.MAX_VALUE);
+
     }
 
 
